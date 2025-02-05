@@ -13,17 +13,28 @@ class ClientController{
 
 
     async createClient(req: Request, res: Response){
-        console.log(req.body);
-        const dto = plainToInstance(CreateClientDTO, req.body);
-        const errors = await validate(dto);
+        try{
 
-        if(errors.length > 0){
-            return res.status(400).send(errors);
+            const dto = plainToInstance(CreateClientDTO, req.body);
+            const errors = await validate(dto);
+
+            if(errors.length > 0){
+                const err = errors.map(err => ({
+                    field: err.property,
+                    constraints: err.constraints
+                }))
+                return res.status(400).json({"validation error": err});
+            }
+
+            const newClient = await this.service.create(dto.name, dto.cellphone);
+
+            return res.status(201).json(newClient);
+        }catch(error){
+            if(error instanceof Error){
+                return res.status(400).json({"message": error.message});
+            }
+            return res.status(500).json({"message": "Internal server error"});
         }
-
-        const newClient = this.service.create(dto.name, dto.cellphone);
-
-        res.status(200).send(newClient);
 
 }
 

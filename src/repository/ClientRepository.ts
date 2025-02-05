@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, Client } from "@prisma/client"
 
 class ClientRepository{
     private repository: PrismaClient;
@@ -9,14 +9,25 @@ class ClientRepository{
     }
 
 
-    async create(name: string, cellphone:string){
-        return await this.repository.client.create({
+    async create(name: string, cellphone:string): Promise<Client>{
+        const newClient = await this.repository.client.create({
             data:{
                 name,
                 cellphone
             }
         })
+        return newClient;
     }
+
+    async findClientByCellphone(cellphone: string): Promise< Client | null> {
+        const existCellphone = this.repository.client.findFirst({
+            where:{
+                cellphone: cellphone
+            }
+        })
+        return existCellphone;
+    }
+
 
 }
 

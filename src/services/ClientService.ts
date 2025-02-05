@@ -9,7 +9,16 @@ class ClientService{
     }
 
     async create(name: string, cellphone: string){
-        return await this.repository.create(name, cellphone);
+
+        const existCellphone = await this.repository.findClientByCellphone(cellphone);
+        
+        if(existCellphone){
+            throw new Error(`${cellphone} already exist`);
+        }
+
+        const result = await this.repository.create(name, cellphone);
+
+        return result
     }
 }
 
