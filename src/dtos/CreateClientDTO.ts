@@ -3,10 +3,10 @@ import { IsString, IsPhoneNumber, } from "class-validator";
 
 class CreateClientDTO{
     @IsString()
-    name: string;
+    name!: string;
 
     @IsPhoneNumber("BR")
-    cellphone: string;
+    cellphone!: string;
 
 }
 

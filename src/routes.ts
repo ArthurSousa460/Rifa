@@ -6,7 +6,7 @@ const router = Router();
 const clientController = new ClientController();
 
 router.get("/", (req: Request, res: Response) => {res.send("ok")});
-router.get("/client/create", async(req: Request, res: Response) =>{clientController.createClient(req, res)});
+router.post("/client/create", async(req: Request, res: Response) =>{await clientController.createClient(req, res)});
 
 
 
