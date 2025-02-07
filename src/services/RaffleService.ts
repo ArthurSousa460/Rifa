@@ -10,13 +10,14 @@ class RaffleService{
         this.clientRepository = new ClientRepository();
     }
 
-    async create(idClient: number){
-        const existClient = await this.clientRepository.findClientById(idClient);
+    async create(clientId: number){
+        const existClient = await this.clientRepository.findClientById(clientId);
 
         if(!existClient){
             throw new Error("Client not exist!");
         }
 
-        return existClient;
+        const newRaffle = await this.raffleRespository.create(clientId);
+        return newRaffle;
     }
 }
