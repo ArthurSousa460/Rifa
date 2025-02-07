@@ -21,3 +21,5 @@ class RaffleService{
         return newRaffle;
     }
 }
+
+export default RaffleService;

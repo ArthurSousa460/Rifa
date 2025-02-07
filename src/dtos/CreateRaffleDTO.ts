@@ -4,3 +4,6 @@ class CreateRaffleDTO{
     @IsNumber()
     clientId!: number
 }
+
+
+export default CreateRaffleDTO;
