@@ -28,6 +28,15 @@ class ClientRepository{
         return existCellphone;
     }
 
+    async findClientById(clientId: number){
+        const clientExist = this.repository.client.findFirst({
+            where:{
+                id: clientId
+            }
+        })
+        return clientExist;
+    }
+
 
 }
 

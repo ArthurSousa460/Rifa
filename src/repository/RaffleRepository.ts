@@ -16,4 +16,7 @@ class RaffleRepository{
         })
         return newRaffle;
     }
+
 }
+
+export default RaffleRepository;
