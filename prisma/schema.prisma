@@ -13,19 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model Client{
-  id Int @id @default(autoincrement())
-  name String
+model Client {
+  id        String    @id @default(uuid())
+  name      String
   cellphone String @unique
 
-  raffle Raffle[]
+  raffle RaffleClient[]
 }
 
-
 model Raffle{
-  id Int @id @default(autoincrement())
-  clientId Int
+  id String @id @default(uuid())
+  name String
+  description String
+  urlBanner String
+  date DateTime
 
+  raffleClient RaffleClient[]
+
+}
+
+model RaffleClient {
+  id       BigInt @id @default(autoincrement())
+  clientId String
+  raffleId String
+
+ raffle Raffle @relation(fields: [raffleId], references: [id])
   client Client @relation(fields: [clientId], references: [id])
 }
