@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Raffle } from "@prisma/client";
 
 class RaffleRepository{
     private repository: PrismaClient;
@@ -8,10 +8,13 @@ class RaffleRepository{
         this.repository = new PrismaClient();
     }
 
-    async create(clientId: number){
+    async create(name: string, description: string, date: Date, urlBanner: string): Promise<Raffle>{
         const newRaffle = await this.repository.raffle.create({
             data:{
-                clientId
+                name,
+                description,
+                date,
+                urlBanner
             }
         })
         return newRaffle;

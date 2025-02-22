@@ -28,7 +28,7 @@ class ClientRepository{
         return existCellphone;
     }
 
-    async findClientById(clientId: number){
+    async findClientById(clientId: string): Promise<Client | null> {
         const clientExist = this.repository.client.findFirst({
             where:{
                 id: clientId

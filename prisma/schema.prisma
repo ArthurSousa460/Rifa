@@ -18,6 +18,9 @@ model Client {
   name      String
   cellphone String @unique
 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
   raffle RaffleClient[]
 }
 
@@ -28,6 +31,9 @@ model Raffle {
   urlBanner   String
   date        DateTime
 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
   raffleClient RaffleClient[]
 }
 
@@ -35,6 +41,9 @@ model RaffleClient {
   id       BigInt @id @default(autoincrement())
   clientId String
   raffleId String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   raffle Raffle @relation(fields: [raffleId], references: [id])
   client Client @relation(fields: [clientId], references: [id])

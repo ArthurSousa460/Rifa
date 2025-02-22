@@ -1,5 +1,7 @@
+import { Raffle } from "@prisma/client";
 import ClientRepository from "../repository/ClientRepository";
 import RaffleRepository from "../repository/RaffleRepository";
+import CreateRaffleDTO from "../dtos/CreateRaffleDTO";
 
 class RaffleService{
     private raffleRespository: RaffleRepository;
@@ -10,14 +12,13 @@ class RaffleService{
         this.clientRepository = new ClientRepository();
     }
 
-    async create(clientId: number){
-        const existClient = await this.clientRepository.findClientById(clientId);
-
-        if(!existClient){
-            throw new Error("Client not exist!");
-        }
-
-        const newRaffle = await this.raffleRespository.create(clientId);
+    async create(createRaffleDTO: CreateRaffleDTO): Promise<Raffle>{
+        const newRaffle = await this.raffleRespository.create(
+            createRaffleDTO.name,
+            createRaffleDTO.description,
+            createRaffleDTO.date,
+            createRaffleDTO.urlBanner
+        );
         return newRaffle;
     }
 }

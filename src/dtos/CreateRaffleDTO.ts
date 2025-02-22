@@ -1,4 +1,4 @@
-import { IsDate, IsNumber, IsString, } from "class-validator";
+import { IsDate, IsString } from "class-validator";
 
 class CreateRaffleDTO{
 
@@ -6,10 +6,11 @@ class CreateRaffleDTO{
     name!: string;
     @IsString()
     description!: string;
+    @IsString()
+    urlBanner!: string;
     @IsDate()
     date!: Date
-    @IsNumber()
-    clientId!: number
+    
 }
 
 

@@ -25,7 +25,7 @@ class RaffleController{
                 return res.status(400).json({"validation error": err});
             }
 
-            const newRaffle = await this.service.create(dto.clientId);
+            const newRaffle = await this.service.create(dto);
             return res.status(201).json(newRaffle);
         }catch(error){
             if(error instanceof Error){
