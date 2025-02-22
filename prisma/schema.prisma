@@ -14,22 +14,21 @@ datasource db {
 }
 
 model Client {
-  id        String    @id @default(uuid())
+  id        String @id @default(uuid())
   name      String
   cellphone String @unique
 
   raffle RaffleClient[]
 }
 
-model Raffle{
-  id String @id @default(uuid())
-  name String
+model Raffle {
+  id          String   @id @default(uuid())
+  name        String
   description String
-  urlBanner String
-  date DateTime
+  urlBanner   String
+  date        DateTime
 
   raffleClient RaffleClient[]
-
 }
 
 model RaffleClient {
@@ -37,6 +36,6 @@ model RaffleClient {
   clientId String
   raffleId String
 
- raffle Raffle @relation(fields: [raffleId], references: [id])
+  raffle Raffle @relation(fields: [raffleId], references: [id])
   client Client @relation(fields: [clientId], references: [id])
 }
