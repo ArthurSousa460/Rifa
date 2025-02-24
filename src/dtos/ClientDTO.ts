@@ -1,7 +1,7 @@
 import { IsString, IsPhoneNumber, } from "class-validator";
 
 
-class CreateClientDTO{
+class ClientDTO{
     @IsString()
     name!: string;
 
@@ -10,4 +10,4 @@ class CreateClientDTO{
 
 }
 
-export default CreateClientDTO;
+export default ClientDTO;
