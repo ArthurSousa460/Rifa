@@ -5,11 +5,16 @@ import CreateRaffleDTO from "../dtos/CreateRaffleDTO";
 
 class RaffleService{
     private raffleRespository: RaffleRepository;
-    private clientRepository: ClientRepository;
+
 
     constructor(){
         this.raffleRespository = new RaffleRepository();
-        this.clientRepository = new ClientRepository();
+    }
+
+    
+    async list(): Promise<Raffle[]>{
+        const raffles = await this.raffleRespository.listRaffles();
+        return raffles;
     }
 
     async create(createRaffleDTO: CreateRaffleDTO): Promise<Raffle>{
