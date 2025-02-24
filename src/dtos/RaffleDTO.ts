@@ -1,6 +1,6 @@
 import { IsDate, IsString } from "class-validator";
 
-class CreateRaffleDTO{
+class RaffleDTO{
 
     @IsString()
     name!: string;
@@ -14,4 +14,4 @@ class CreateRaffleDTO{
 }
 
 
-export default CreateRaffleDTO;
+export default RaffleDTO;

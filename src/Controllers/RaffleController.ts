@@ -1,6 +1,6 @@
 import { plainToInstance } from "class-transformer";
 import RaffleService from "../services/RaffleService";
-import CreateRaffleDTO from "../dtos/CreateRaffleDTO";
+import CreateRaffleDTO from "../dtos/RaffleDTO";
 import { Request, Response } from "express";
 import { validate } from "class-validator";
 
@@ -34,6 +34,8 @@ class RaffleController{
             return res.status(500).json({"message": "internal server error"});
         }
     }
+
+    
 }
 
 export default RaffleController;

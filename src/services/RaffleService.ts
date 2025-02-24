@@ -1,7 +1,6 @@
 import { Raffle } from "@prisma/client";
-import ClientRepository from "../repository/ClientRepository";
 import RaffleRepository from "../repository/RaffleRepository";
-import CreateRaffleDTO from "../dtos/CreateRaffleDTO";
+import RaffleDTO from "../dtos/RaffleDTO";
 
 class RaffleService{
     private raffleRespository: RaffleRepository;
@@ -13,19 +12,36 @@ class RaffleService{
 
     
     async list(): Promise<Raffle[]>{
-        const raffles = await this.raffleRespository.listRaffles();
+        const raffles = await this.raffleRespository.list();
         return raffles;
     }
 
-    async create(createRaffleDTO: CreateRaffleDTO): Promise<Raffle>{
+    async create(raffleDTO: RaffleDTO): Promise<Raffle>{
         const newRaffle = await this.raffleRespository.create(
-            createRaffleDTO.name,
-            createRaffleDTO.description,
-            createRaffleDTO.date,
-            createRaffleDTO.urlBanner
+            raffleDTO.name,
+            raffleDTO.description,
+            raffleDTO.date,
+            raffleDTO.urlBanner
         );
         return newRaffle;
     }
+
+    async update(id: string, raffleDTO: RaffleDTO): Promise<Raffle>{
+        const updatedRaffle = await this.raffleRespository.update(
+            id,
+            raffleDTO.name,
+            raffleDTO.description,
+            raffleDTO.date,
+            raffleDTO.urlBanner
+        );
+        return updatedRaffle;
+    }
+
+    async delete(id: string): Promise<Raffle>{
+        const deletedRaffle = await this.raffleRespository.delete(id);
+        return deletedRaffle;
+    }
+    
 }
 
 export default RaffleService;
